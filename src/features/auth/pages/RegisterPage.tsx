@@ -5,10 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 const RegisterPage = () => {
     return (
         <PageContainer>
-            <SectionContainer className="min-h-[calc(100vh-144px)]">
+            <SectionContainer padded className="min-h-[calc(100vh-144px)] w-full flex flex-col justify-center m-auto">
                 <Card>
                     <CardHeader className="flex flex-col items-center justify-center">
-                        <h1>Create an Account</h1>
+                        <h1 className="text-primary text-3xl font-bold">Buat Akun</h1>
+                        <p className="text-muted-foreground">Qepoin kreator favorit kamu</p>
                     </CardHeader>
                     <CardContent>
 
