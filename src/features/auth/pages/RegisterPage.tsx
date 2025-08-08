@@ -9,14 +9,23 @@ import { Card, CardContent, CardFooter, CardHeader } from "~/components/ui/card"
 import { Form } from "~/components/ui/form";
 import { RegisterFormInner } from "../components/RegisterFormInner";
 import { registerFormSchema, type RegisterFormSchema } from "../forms/register";
+import { api } from "~/utils/api";
 
 const RegisterPage = () => {
     const form = useForm<RegisterFormSchema>({
         resolver: zodResolver(registerFormSchema)
     })
 
+    const {mutate: registerUser} = api.auth.register.useMutation({
+        onSuccess: () => {
+            alert("Akun berhasil dibuat, silahkan login")
+        },
+        onError: (error) => {
+            alert(`Gagal membuat akun: ${error.message}`);
+        }
+    })
     const handleRegister = (values: RegisterFormSchema) => {
-        alert('regis')
+        registerUser(values)
     }
 
     return (
