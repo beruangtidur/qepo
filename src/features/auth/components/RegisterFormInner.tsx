@@ -9,12 +9,15 @@ import { Label } from "~/components/ui/label"
 
 
 type RegsiterFormInnerProps = {
-    onRegisterSubmit : (values: RegisterFormSchema) => void
+    onRegisterSubmit: (values: RegisterFormSchema) => void,
+    isLoading: boolean,
+    buttonText?: string,
+    isShowPassword?: boolean
 }
 
 export const RegisterFormInner = (props: RegsiterFormInnerProps) => {
     const form = useFormContext<RegisterFormSchema>()
-    const [ showPassword, setShowPassword] = useState<boolean>(false)
+    const [showPassword, setShowPassword] = useState<boolean>(false)
 
 
     return (
@@ -33,12 +36,11 @@ export const RegisterFormInner = (props: RegsiterFormInnerProps) => {
                                 <FormDescription />
                                 <FormMessage />
                             </FormItem>
-
-
                         </>
                     )
                 }}
             />
+
             <FormField
                 control={form.control}
                 name="password"
@@ -52,18 +54,19 @@ export const RegisterFormInner = (props: RegsiterFormInnerProps) => {
                             <FormDescription />
                             <FormMessage />
                         </FormItem>
-
                     </>
                 )}
             />
 
-            <Label className="flex item-center gap-4">
-                <Checkbox checked={showPassword} onCheckedChange={(checked) => { setShowPassword(!!checked) }} />
-                Show Password
-            </Label>
+            {props.isShowPassword && (
+                <Label className="flex item-center gap-4">
+                    <Checkbox checked={showPassword} onCheckedChange={(checked) => { setShowPassword(!!checked) }} />
+                    Show Password
+                </Label>
+            )}
 
 
-            <Button className="mt-5 w-full cursor-pointer" type="submit">Submit</Button>
+            <Button disabled={props.isLoading} className="mt-5 w-full cursor-pointer" type="submit">{props.buttonText ?? 'Buat akun'}</Button>
         </form>
     )
 }

@@ -10,17 +10,22 @@ import { Form } from "~/components/ui/form";
 import { RegisterFormInner } from "../components/RegisterFormInner";
 import { registerFormSchema, type RegisterFormSchema } from "../forms/register";
 import { api } from "~/utils/api";
+import { toast } from "sonner";
 
 const RegisterPage = () => {
     const form = useForm<RegisterFormSchema>({
         resolver: zodResolver(registerFormSchema)
     })
 
-    const {mutate: registerUser} = api.auth.register.useMutation({
+    const { mutate: registerUser, isPending: registerUserIsPending } = api.auth.register.useMutation({
         onSuccess: () => {
-            alert("Akun berhasil dibuat, silahkan login")
+            toast("Akun berhasil dibuat")
+            form.reset();
+            form.setValue("email", "");
+            form.setValue("password", "");
         },
         onError: (error) => {
+            toast.error(`Gagal membuat akun: ${error.message}`);
             alert(`Gagal membuat akun: ${error.message}`);
         }
     })
@@ -38,7 +43,11 @@ const RegisterPage = () => {
                     </CardHeader>
                     <CardContent>
                         <Form {...form}>
-                            <RegisterFormInner onRegisterSubmit={handleRegister}/>
+                            <RegisterFormInner
+                                isLoading={registerUserIsPending}
+                                onRegisterSubmit={handleRegister}
+                                isShowPassword={true}
+                            />
                         </Form>
 
                         {/* ====== */}
