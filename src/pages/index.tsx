@@ -1,14 +1,17 @@
-import Head from "next/head";
-import Link from "next/link";
 import { Button } from "~/components/ui/button";
-import { Moon, Sun } from "lucide-react";
+import { LogOut, Moon, Sun } from "lucide-react";
 import { api } from "~/utils/api";
 import { useTheme } from "next-themes";
+import { supabase } from "~/lib/supabase/client";
 
 export default function Home() {
   const hello = api.post.hello.useQuery({ text: "from tRPC" });
 
   const {setTheme} = useTheme();
+
+  const handleLogout = () => {
+    void supabase.auth.signOut();
+  }
 
   return (
     <>
@@ -19,10 +22,13 @@ export default function Home() {
           <Moon />
 
         </Button>
-
         <Button onClick={()=> setTheme('light')}className="cursor-pointer" size="icon">
           <Sun />
         </Button>
+       <Button onClick={handleLogout} variant="destructive" className="cursor-pointer">
+        <LogOut />
+       </Button>
+
       </main>
     </>
   );
