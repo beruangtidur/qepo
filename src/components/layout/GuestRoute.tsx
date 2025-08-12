@@ -9,9 +9,9 @@ export const GuestRoute = (props: PropsWithChildren) => {
 
     useEffect(() => {
         void (async () => {
-            const user = await supabase.auth.getUser()
+            const {data} = await supabase.auth.getUser()
 
-            if (user) {
+            if (data.user) {
                 await router.replace('/')
             }
         }
