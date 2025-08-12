@@ -2,7 +2,7 @@ import z from "zod";
 import { passwordSchema } from "~/schemas/auth";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { generateFromEmail } from "unique-username-generator";
-import { supabaseAdminClient, supabaseDefaultClient } from "~/lib/supabase/client";
+import { supabaseAdminClient } from "~/lib/supabase/server";
 
 
 export const authRouter = createTRPCRouter({

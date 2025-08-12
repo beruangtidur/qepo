@@ -10,7 +10,7 @@ import { Label } from "~/components/ui/label"
 
 type RegsiterFormInnerProps = {
     onRegisterSubmit: (values: RegisterFormSchema) => void,
-    isLoading: boolean,
+    isLoading?: boolean,
     buttonText?: string,
     isShowPassword?: boolean
 }
