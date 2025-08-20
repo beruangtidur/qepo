@@ -37,7 +37,7 @@ const RegisterPage = () => {
     return (
         <GuestRoute>
             <PageContainer>
-                <SectionContainer padded className="min-h-[calc(100vh-144px)] w-full flex flex-col justify-center m-auto items-center">
+                <SectionContainer padded className="min-h-[calc(100vh-144px)] w-full flex flex-col justify-center items-center">
                     <Card className="min-w-[480]">
                         <CardHeader className="flex flex-col items-center justify-center">
                             <h1 className="text-primary text-3xl font-bold">Buat Akun</h1>
